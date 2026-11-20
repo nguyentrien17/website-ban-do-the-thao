@@ -1,46 +1,48 @@
-# website-ban-do-the-thao
-website bán đồ thể thao
-# Docker Getting Started Tutorial
+# Website bán đồ thể thao
 
-This tutorial was written with the intent of helping folks get up and running
-with containers and is designed to work with Docker Desktop. While not going too much 
-into depth, it covers the following topics:
+Website thương mại điện tử bán đồ thể thao viết bằng PHP thuần và MySQL. Có giỏ hàng, đặt hàng, thanh toán, tài khoản khách hàng và mục tin tức thể thao.
 
-- Running your first container
-- Building containers
-- Learning what containers are
-- Running and removing containers
-- Using volumes to persist data
-- Using bind mounts to support development
-- Using container networking to support multi-container applications
-- Using Docker Compose to simplify the definition and sharing of applications
-- Using image layer caching to speed up builds and reduce push/pull size
-- Using multi-stage builds to separate build-time and runtime dependencies
+## Tính năng
 
-## Getting Started
+- Xem danh sách sản phẩm, chi tiết sản phẩm, sản phẩm tương tự, tìm kiếm.
+- Giỏ hàng, kiểm tra hàng, thanh toán (có tùy chọn ví MoMo).
+- Đăng ký, đăng nhập, đăng xuất, đổi mật khẩu, cập nhật hồ sơ khách hàng.
+- Xem đơn hàng của tôi, chi tiết đơn, hủy đơn.
+- Bình luận sản phẩm, gửi liên hệ/phản hồi.
+- Tin tức thể thao, danh mục tin, câu lạc bộ và giải đấu.
+- Banner trượt (slide), thống kê người đang online.
 
-If you wish to run the tutorial, you can use the following command after installing Docker Desktop:
+## Công nghệ
 
-```bash
-docker run -d -p 80:80 docker/website-ban-do-the-thao
-```
+- PHP (kết nối MySQL bằng PDO và mysqli)
+- MySQL / MariaDB
+- HTML, CSS
 
-Once it has started, you can open your browser to [http://localhost](http://localhost).
+## Cấu trúc chính
 
-## Development
+| File | Vai trò |
+|---|---|
+| `index.php` | Trang chủ |
+| `dssanpham.php`, `view_chitietsp.php`, `sptuongtu.php`, `timkiem.php` | Sản phẩm và tìm kiếm |
+| `cart.php`, `xyly_giohang.php`, `add.php`, `kiemtrahang.php` | Giỏ hàng |
+| `thanhtoan.php`, `callback.php`, `chuyendoitien.php` | Thanh toán |
+| `dangky.php`, `loginform.php`, `xuly_login.php`, `xuly_signup.php`, `logout.php` | Tài khoản |
+| `hosokhachhang.php`, `updatehosokh.php`, `doimatkhau.php`, `xuly_doimatkhau.php` | Hồ sơ khách hàng |
+| `donhangcuatoi.php`, `chitietdhkh.php`, `xuly_huydonhang.php` | Đơn hàng |
+| `tintucthethao.php`, `view_chitiettintuc.php` | Tin tức |
+| `view_gioithieu.php`, `view_lienhe.php`, `xuly_lienhe.php`, `xuly_comment.php` | Giới thiệu, liên hệ, bình luận |
+| `config.php`, `dbcontroller.php` | Kết nối cơ sở dữ liệu |
+| `shopthethao.sql` | Cấu trúc và dữ liệu mẫu của database |
 
-This project has a `docker-compose.yml` file, which will start the mkdocs application on your
-local machine and help you see changes instantly.
+## Cài đặt
 
-```bash
-docker compose up
-```
+Yêu cầu: PHP 7.4+, MySQL/MariaDB, và một web server cục bộ như XAMPP hoặc Laragon.
 
-## Contributing
+1. Chép mã nguồn vào thư mục web (ví dụ `htdocs/website-ban-do-the-thao`).
+2. Tạo database `shopthethao` và nhập file `shopthethao.sql` (qua phpMyAdmin hoặc `mysql -u root shopthethao < shopthethao.sql`).
+3. Kiểm tra thông tin kết nối trong `config.php` và `dbcontroller.php` (mặc định: host `localhost`, user `root`, database `shopthethao`) rồi sửa cho khớp máy của bạn.
+4. Mở `http://localhost/website-ban-do-the-thao/`.
 
-If you find typos or other issues with the tutorial, feel free to create a PR and suggest fixes!
+## Lưu ý
 
-If you have ideas on how to make the tutorial better or want to suggest adding new content, please open an 
-issue first before working on your idea. While we love input, we want to keep the tutorial scoped to new-comers.
-As such, we may reject ideas for more advanced requests and don't want you to lose any work you might
-have done. So, ask first and we'll gladly hear your thoughts!
+Dự án phục vụ học tập. Trước khi đưa lên môi trường thật, nên đổi tài khoản database mặc định, rà soát việc chống SQL injection và băm mật khẩu.
